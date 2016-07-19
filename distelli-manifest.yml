@@ -1,0 +1,9 @@
+bmcgehee/link-test:
+  Build:
+    - echo "Nothing to build"
+  PkgInclude:
+    - '*'
+  Env:
+    - PROJECTDIR: "/home/bmcgehee/public_html/"
+  PostInstall:
+    - ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
