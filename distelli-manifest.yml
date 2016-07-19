@@ -9,6 +9,6 @@ bmcgehee/link_test:
   PostInstall:
     - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
     - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
-    #- sudo chown -R $OWNER:$OWNER $PROJECTDIR
+    - sudo chown -R $OWNER:$OWNER $PROJECTDIR
     - cd $PROJECTDIR
     - sudo find . -type l -exec test ! -e {} \; -delete
