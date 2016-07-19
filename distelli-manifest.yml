@@ -10,7 +10,7 @@ bmcgehee/link_test:
     - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
     - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
     - sudo chown -R $OWNER:$OWNER $PROJECTDIR
-    - if [-f /distelli/last_distelli_install]; then
+    - if [ -f /distelli/last_distelli_install ]; then
     -    DISTELLI_LAST_INSTALLHOME=$(cat /distelli/last_distelli_install)
     - fi
     - echo -e "$DISTELLI_INSTALLHOME\c" > /distelli/last_distelli_install
