@@ -6,9 +6,11 @@ bmcgehee/link_test:
   Env:
     - PROJECTDIR: "/home/bmcgehee/public_html/"
     - OWNER: "bmcgehee"
-  PreStart:
+  PostInstall:
     - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
     - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
     - sudo chown -R $OWNER:$OWNER $PROJECTDIR
+  PostStart:
     - cd $PROJECTDIR
     - sudo find . -type l -exec test ! -e '{}' \; -delete
+    
