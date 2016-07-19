@@ -15,14 +15,14 @@ bmcgehee/link_test:
     - fi
     - echo -e "$DISTELLI_INSTALLHOME\c" > /distelli/last_distelli_install
     - cd $DISTELLI_LAST_INSTALLHOME
-    - echo "$DISTELLI_LAST_INSTALLHOME"
-    - echo "First ls---------------------------"
-    - ls -l
+    #- echo "$DISTELLI_LAST_INSTALLHOME"
+    #- echo "First ls---------------------------"
+    #- ls -l
     - sudo rm -rf $DISTELLI_LAST_INSTALLHOME
-    - echo "Second ls--------------------------"
-    - ls -l    
+    #- echo "Second ls--------------------------"
+    #- ls -l    
     - cd $PROJECTDIR
-    - echo "Third ls --------------------------"
-    - ls -l
+    #- echo "Third ls --------------------------"
+    #- ls -l
     - sudo find . -type l -exec test ! -e '{}' \; -delete
     
