@@ -1,4 +1,4 @@
-bmcgehee/link-test:
+bmcgehee/link_test:
   Build:
     - echo "Nothing to build"
   PkgInclude:
