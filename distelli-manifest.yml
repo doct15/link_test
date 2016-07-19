@@ -10,7 +10,12 @@ bmcgehee/link_test:
     - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
     - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
     - sudo chown -R $OWNER:$OWNER $PROJECTDIR
-  PostStart:
+    - if [-f /distelli/last_distelli_install]; then
+    -    DISTELLI_LAST_INSTALLHOME=$(cat /distelli/last_distelli_install)
+    - fi
+    - echo -e "$DISTELLI_INSTALLHOME\c" > /distelli/last_distelli_install
+    - cd $DISTELLI_INSTALLHOME
+    - sudo rm -rf
     - cd $PROJECTDIR
     - sudo find . -type l -exec test ! -e '{}' \; -delete
     
