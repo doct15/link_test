@@ -6,4 +6,5 @@ bmcgehee/link_test:
   Env:
     - PROJECTDIR: "/home/bmcgehee/public_html/"
   PostInstall:
-    - ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
+    - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
+    - sudo chown -R $OWNER:$OWNER $PROJECTDIR
