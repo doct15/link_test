@@ -14,7 +14,7 @@ bmcgehee/link_test:
     -    DISTELLI_LAST_INSTALLHOME=$(cat /distelli/last_distelli_install)
     - fi
     - echo -e "$DISTELLI_INSTALLHOME\c" > /distelli/last_distelli_install
-    - cd $DISTELLI_INSTALLHOME
+    - cd $DISTELLI_LAST_INSTALLHOME
     - sudo rm -rf
     - cd $PROJECTDIR
     - sudo find . -type l -exec test ! -e '{}' \; -delete
