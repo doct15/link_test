@@ -6,7 +6,7 @@ bmcgehee/link_test:
   Env:
     - PROJECTDIR: "/home/bmcgehee/public_html/"
     - OWNER: "bmcgehee"
-  PostInstall:
+  PreStart:
     - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
     - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
     - sudo chown -R $OWNER:$OWNER $PROJECTDIR
