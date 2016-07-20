@@ -7,9 +7,15 @@ bmcgehee/link_test:
     - PROJECTDIR: "/home/bmcgehee/public_html/"
     - OWNER: "bmcgehee"
   PostInstall:
-    #- sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
-    - sudo ln -sf $DISTELLI_APPHOME/public_html/* $PROJECTDIR
+    - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
+    - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
     - sudo chown -R $OWNER:$OWNER $PROJECTDIR
+    - if [ -f /distelli/last_distelli_install ]; then
+    -    DISTELLI_LAST_INSTALLHOME=$(cat /distelli/last_distelli_install)
+    - fi
+    - echo -e "$DISTELLI_INSTALLHOME\c" > /distelli/last_distelli_install
+    - cd $DISTELLI_LAST_INSTALLHOME
+    - sudo rm -rf $DISTELLI_LAST_INSTALLHOME
     - cd $PROJECTDIR
-    #- sudo find . -type l -exec test ! -e '{}' \; -delete
+    - sudo find . -type l -exec test ! -e '{}' \; -delete
     
