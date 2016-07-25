@@ -6,33 +6,32 @@ bmcgehee/link_test:
   Env:
     - PROJECTDIR: "/home/bmcgehee/public_html"
     - OWNER: "bmcgehee"
-    - dir: $PROJECTDIR
+    - DIR: $PROJECTDIR
     - new: $DISTELLI_INSTALLHOME/public_html
   PostInstall:
-    - export old=$(readlink $PROJECTDIR/200.html | sed 's|/200.html||')
     - # [1] Link "new" files:
     - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
-    -     if ! [ -e "$dir/$f" ]; then
-    -         echo "NEW:$new - /$f OLD:$dir - /$f"
-    -         echo "Creating $dir/$(dirname $f)"
-    -         sudo mkdir -p "$dir/$(dirname $f)"
-    -         #ls -l "$dir"
-    -         sudo ln -s "$new/$f" "$dir/$f"
+    -     if ! [ -e "$DIR/$f" ]; then
+    -         echo "NEW:$new - /$f OLD:$DIR - /$f"
+    -         echo "Creating $DIR/$(dirname $f)"
+    -         sudo mkdir -p "$DIR/$(dirname $f)"
+    -         sudo ln -s "$new/$f" "$DIR/$f"
     -     fi
     - done
     - # [2] Rename symlinks into place and delete "old" symlinks:
-    - for f in $(find "$dir" -type l -print0 | xargs -0 readlink | grep "^$prefix" | grep -v "^$new" | awk -F/ '{{for(n=6; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' ); do
+    - for f in $(find "$DIR" -type l -print0 | xargs -0 readlink | grep "^$prefix" | grep -v "^$new" | awk -F/ '{{for(n=6; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' ); do
     -    if ! [ -e "$new/$f" ]; then
     -        # Delete old symlink:
-    -        echo "Deleting old symlink $dir - $f"
-    -        sudo rm -rf "$dir/$f"
+    -        echo "Deleting old symlink $DIR - $f"
+    -        sudo rm -rf "$DIR/$f"
     -    else
     -        # Relink, move link into place to make this
     -        # change atomically:
-    -        sudo ln -s "$new/$f" "$dir/.TEMP-LINK-$$"
-    -        sudo mv -f "$dir/.TEMP-LINK-$$" "$dir/$f"
+    -        sudo ln -s "$new/$f" "$DIR/.TEMP-LINK-$$"
+    -        sudo mv -f "$DIR/.TEMP-LINK-$$" "$DIR/$f"
     -    fi
     - done
+    - Changing ownership
     - cd $DISTELLI_INSTALLHOME
     - sudo chown -R $OWNER:$OWNER *
     - cd $PROJECTDIR
