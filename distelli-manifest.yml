@@ -4,18 +4,31 @@ bmcgehee/link_test:
   PkgInclude:
     - '*'
   Env:
-    - PROJECTDIR: "/home/bmcgehee/public_html/"
+    - PROJECTDIR: "/home/bmcgehee/public_html"
     - OWNER: "bmcgehee"
+    - dir: $PROJECTDIR
+    - new: $DISTELLI_INSTALLHOME
   PostInstall:
-    - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
-    - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR
-    - sudo chown -R $OWNER:$OWNER $PROJECTDIR
-    - if [ -f /distelli/last_distelli_install ]; then
-    -    DISTELLI_LAST_INSTALLHOME=$(cat /distelli/last_distelli_install)
-    - fi
-    - echo -e "$DISTELLI_INSTALLHOME\c" > /distelli/last_distelli_install
-    - cd $DISTELLI_LAST_INSTALLHOME
-    - sudo rm -rf $DISTELLI_LAST_INSTALLHOME
-    - cd $PROJECTDIR
-    - sudo find . -type l -exec test ! -e '{}' \; -delete
+    - export old=$(readlink $PROJECTDIR/200.html | sed 's|/public_html/200.html||')
+    - # [1] Link "new" files:
+    - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
+    -     if ! [ -e "$dir/$f" ]; then
+    -         ln -s "$new/$f" "$dir/$f"
+    -     fi
+    - done
+    - # [2] Rename symlinks into place and delete "old" symlinks:
+    - for f in $(find "$dir" -type l -print0 | xargs -0 readlink | grep "^$old" | cut -b $((${#old}+2))-); do
+    -    if ! [ -e "$new/$f" ]; then
+    -        # Delete old symlink:
+    -        rm -rf "$dir/$f"
+    -    else
+    -        # Relink, move link into place to make this
+    -        # change atomically:
+    -        ln -s "$new/$f" "$dir/.TEMP-LINK-$$"
+    -        mv -f "$dir/.TEMP-LINK-$$" "$dir/$f"
+    -    fi
+    - done
+
+
     
+
