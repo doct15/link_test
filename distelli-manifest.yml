@@ -25,12 +25,12 @@ bmcgehee/link_test:
     - for f in $(find "$dir" -type l -print0 | xargs -0 readlink | grep "^$old" | cut -b $((${#old}+2))-); do
     -    if ! [ -e "$new/$f" ]; then
     -        # Delete old symlink:
-    -        rm -rf "$dir/$f"
+    -        sudo rm -rf "$dir/$f"
     -    else
     -        # Relink, move link into place to make this
     -        # change atomically:
-    -        ln -s "$new/$f" "$dir/.TEMP-LINK-$$"
-    -        mv -f "$dir/.TEMP-LINK-$$" "$dir/$f"
+    -        sudo ln -s "$new/$f" "$dir/.TEMP-LINK-$$"
+    -        sudo mv -f "$dir/.TEMP-LINK-$$" "$dir/$f"
     -    fi
     - done
 
