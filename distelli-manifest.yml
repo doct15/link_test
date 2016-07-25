@@ -23,7 +23,7 @@ bmcgehee/link_test:
     - done
     - # [2] Rename symlinks into place and delete "old" symlinks:
     #- for f in $(find "$dir" -type l -print0 | xargs -0 readlink | grep "^$old" | cut -b $((${#old}+2))-); do
-    - for f in $(find "$dir" -type l -print0 | xargs -0 readlink | grep "^$prefix" | grep -v "^$new" | awk -F/ '{{for(n=5; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' ); do
+    - for f in $(find "$dir" -type l -print0 | xargs -0 readlink | grep "^$prefix" | grep -v "^$new" | awk -F/ '{{for(n=6; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' ); do
     -    if ! [ -e "$new/$f" ]; then
     -        # Delete old symlink:
     -        echo "Deleting old symlink $dir - $f"
