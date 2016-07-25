@@ -15,9 +15,9 @@ bmcgehee/link_test:
     - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
     -     if ! [ -e "$dir/$f" ]; then
     -         echo "NEW:$new - /$f OLD:$dir - /$f"
-    -         echo "Creating $dir$(dirname $f)"
-    -         sudo mkdir -p "$dir$(dirname $f)"
-    -         ls -l "$dir$"
+    -         echo "Creating $dir/$(dirname $f)"
+    -         sudo mkdir -p "$dir/$(dirname $f)"
+    -         #ls -l "$dir"
     -         sudo ln -s "$new/$f" "$dir/$f"
     -     fi
     - done
