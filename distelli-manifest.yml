@@ -10,7 +10,7 @@ bmcgehee/link_test:
     - new: $DISTELLI_INSTALLHOME/public_html
   PostInstall:
     - export old=$(readlink $PROJECTDIR/200.html | sed 's|/200.html||')
-    - sudo ln -s "$DISTELLI_INSTALLHOME/public_html/200.html" "$PROJECTDIR/"
+    - sudo ln -s "$DISTELLI_INSTALLHOME/public_html/200.html" "$PROJECTDIR/" | true
     - # [1] Link "new" files:
     - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
     -     if ! [ -e "$dir/$f" ]; then
