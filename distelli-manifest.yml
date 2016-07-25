@@ -13,7 +13,7 @@ bmcgehee/link_test:
     - # [1] Link "new" files:
     - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
     -     if ! [ -e "$dir/$f" ]; then
-    -         ln -s "$new/$f" "$dir/$f"
+    -         sudo ln -s "$new/$f" "$dir/$f"
     -     fi
     - done
     - # [2] Rename symlinks into place and delete "old" symlinks:
