@@ -13,6 +13,7 @@ bmcgehee/link_test:
     - # [1] Link "new" files:
     - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
     -     if ! [ -e "$dir/$f" ]; then
+    -         sudo mkdir -p $dir
     -         sudo ln -s "$new/$f" "$dir/$f"
     -     fi
     - done
