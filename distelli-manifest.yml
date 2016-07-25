@@ -14,7 +14,7 @@ bmcgehee/link_test:
     - # [1] Link "new" files:
     - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
     -     if ! [ -e "$dir/$f" ]; then
-    -         echo "NEW:$new/$f OLD:$dir/$f"
+    -         echo "NEW:$new - /$f OLD:$dir - /$f"
     -         echo "Creating $dir"
     -         sudo mkdir -p "$dir"
     -         ls -l "$dir$"
