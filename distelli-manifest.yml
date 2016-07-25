@@ -7,9 +7,9 @@ bmcgehee/link_test:
     - PROJECTDIR: "/home/bmcgehee/public_html"
     - OWNER: "bmcgehee"
     - dir: $PROJECTDIR
-    - new: $DISTELLI_INSTALLHOME
+    - new: $DISTELLI_INSTALLHOME/public_html
   PostInstall:
-    - export old=$(readlink $PROJECTDIR/200.html | sed 's|/public_html/200.html||')
+    - export old=$(readlink $PROJECTDIR/200.html | sed 's|/200.html||')
     - # [1] Link "new" files:
     - for f in $(find "$new" \! -type d | cut -b $((${#new}+2))-); do
     -     if ! [ -e "$dir/$f" ]; then
