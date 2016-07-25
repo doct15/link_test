@@ -17,7 +17,7 @@ bmcgehee/link_test:
     -         echo "NEW:$new/$f OLD:$dir/$f"
     -         echo "Creating $dir"
     -         sudo mkdir -p "$dir"
-    -         ls -l "$dir$
+    -         ls -l "$dir$"
     -         sudo ln -s "$new/$f" "$dir/$f"
     -     fi
     - done
