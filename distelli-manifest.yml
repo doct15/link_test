@@ -6,11 +6,21 @@ bmcgehee/link_test:
   Env:
     - PROJECTDIR: "/home/bmcgehee/public_html"
     - OWNER: "bmcgehee"
+    - PREFIX: "/distelli/_apps"
   PostInstall:
     - cd $DISTELLI_INSTALLHOME
     - sudo chown -R $OWNER:$OWNER *
     - sudo ln -sf $DISTELLI_INSTALLHOME/public_html/* $PROJECTDIR/
     #- sudo rm "$PROJECTDIR/bin/distelli-*.sh"
-    - sudo chown -R $OWNER:$OWNER $PROJECTDIR
-    - sudo find $PROJECTDIR -type l -exec grep -v "^$DISTELLI_INSTALLHOME" '{}' \; -delete
+    - cd $PROJECTDIR
+    #- sudo chown -R $OWNER:$OWNER $PROJECTDIR
+    #- sudo find $PROJECTDIR -type l -exec grep "/distelli/_apps/" '{}' \; -exec grep -v "^$DISTELLI_INSTALLHOME" '{}' \; -delete
+    #- for f in $(find $PROJECTDIR -type l -print0 | xargs -0 readlink | grep "/distelli/_apps/" | grep -v "^$DISTELLI_INSTALLHOME"); do
+    #- sudo find $PROJECTDIR -type l -exec readlink '{}' \; -exec grep -s "/distelli/_apps/" '{}' \; -exec grep -v "^$DISTELLI_INSTALLHOME" '{}' \; -delete   
+    #- cd $PROJECTDIR
+    - for f in $(find . -type l -print0 | xargs -0 readlink | grep -s "^$PREFIX" | grep -sv "^$DISTELLI_INSTALLHOME" | awk -F/ '{{for(n=6; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' | cut -b 2- ); do
+    -   echo "Delete $f"
+    -   sudo rm $f
+    - done
+    
 
