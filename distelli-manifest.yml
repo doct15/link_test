@@ -9,7 +9,7 @@ bmcgehee/link_test:
   PostInstall:
     - sudo chown -R $OWNER:$OWNER $DISTELLI_INSTALLHOME
     - sudo ln -sf "$DISTELLI_INSTALLHOME/public_html/*" "$PROJECTDIR/"
-    - sudo rm "$PROJECTDIR/bin/distelli-*.sh"
+    #- sudo rm "$PROJECTDIR/bin/distelli-*.sh"
     - sudo chown -R $OWNER:$OWNER $PROJECTDIR
     - sudo find $PROJECTDIR -type l -exec grep -v "^$DISTELLI_INSTALLHOME" '{}' \; -delete
 
