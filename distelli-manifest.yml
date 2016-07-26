@@ -8,7 +8,7 @@ bmcgehee/link_test:
     - OWNER: "bmcgehee"
     - PREFIX: "/distelli/_apps"
   PostInstall:
-    - cd $DISTELLI_INSTALLHOME
-    - sudo ln -sf $PROJECTDIR/* $DISTELLI_INSTALLHOME/public_html/
-    - sudo chown -R $OWNER:$OWNER *
+    #- sudo ln -sf $PROJECTDIR/{.*,*} $DISTELLI_INSTALLHOME/public_html/
+    #- cd $DISTELLI_INSTALLHOME
+    #- sudo chown -R $OWNER:$OWNER *
 
