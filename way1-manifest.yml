@@ -34,8 +34,17 @@ bmcgehee/link_test:
     #- echo "DEBUG: Changing ownership"
     - cd $DISTELLI_INSTALLHOME
     - sudo chown -R $OWNER:$OWNER *
-    - cd $PROJECTDIR
-    - sudo chown -R $OWNER:$OWNER *
+    #- cd $PROJECTDIR
+    #- sudo chown -R $OWNER:$OWNER *
+  Terminate:
+    - for f in $(find "$DIR" -type l -print0 | xargs -0 readlink | grep "^$prefix" | awk -F/ '{{for(n=6; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' | cut -b 2- ); do
+    -    if ! [ -e "$NEW/$f" ]; then
+    -        # Delete old symlink:
+    #-        echo "DEBUG: Deleting old symlink $DIR - $f"
+    -        sudo rm -rf "$DIR/$f"
+    -    fi
+    - done
+
 
 
 
