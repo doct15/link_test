@@ -18,7 +18,7 @@ bmcgehee/link_test:
     - done
   PostTerminate:
     - cd $PROJECTDIR
-    - for f in $(find . -type l -print0 | xargs -0 readlink | grep -s "^$PREFIX" | grep -sv "^$DISTELLI_INSTALLHOME" | awk -F/ '{{for(n=6; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' | cut -b 2- ); do
+    - for f in $(find . -type l -print0 | xargs -0 readlink | grep -s "^$PREFIX" | awk -F/ '{{for(n=6; n < NF+1; n++){ printf "/%s", $(n)} print ""}}' | cut -b 2- ); do
     -   echo "Delete $f"
     -   sudo rm $f
     - done
